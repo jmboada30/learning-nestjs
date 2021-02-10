@@ -28,7 +28,7 @@ export class User extends BaseEntity {
   password: string;
 
   @Column({ type: 'boolean', default: 1 })
-  status: string;
+  status: number;
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;

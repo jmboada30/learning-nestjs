@@ -3,7 +3,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   JoinTable,
   ManyToMany,
   PrimaryGeneratedColumn,
@@ -23,7 +22,7 @@ export class Role extends BaseEntity {
   description: string;
 
   @Column({ type: 'boolean', default: 1 })
-  status: string;
+  status: number;
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
@@ -31,7 +30,7 @@ export class Role extends BaseEntity {
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @ManyToMany((type) => User, (user) => user.roles)
+  @ManyToMany(() => User, (user) => user.roles)
   @JoinTable({ name: 'users_roles' })
   users: User[];
 }
