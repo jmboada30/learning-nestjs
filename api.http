@@ -3,6 +3,7 @@
 @prefix = api
 @host = http://{{hostname}}:{{port}}/{{prefix}}
 @contentType = application/json
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXMydEB0ZXN0LmNvbSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlcyI6WyJHRU5FUkFMIl0sImlhdCI6MTYxMzAwNTM1MCwiZXhwIjoxNjEzMDA4OTUwfQ.C9v2jTi0VyJfew7NubIgZnDaF8Y10WCXKnct19L1m6E
 
 ### Create Role
 POST {{host}}/roles HTTP/1.1
@@ -37,6 +38,8 @@ content-type: {{contentType}}
 
 ### getUsers
 GET {{host}}/users HTTP/1.1
+content-type: {{contentType}}
+Authorization: Bearer {{token}}
 
 
 ### getUserById

@@ -7,7 +7,9 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { ReadUserDto, UpdateUserDto } from './dtos';
 import { UserService } from './user.service';
 
@@ -20,6 +22,7 @@ export class UserController {
     return this.userService.get(userId);
   }
 
+  @UseGuards(AuthGuard())
   @Get()
   getUsers(): Promise<ReadUserDto[]> {
     return this.userService.getAll();
