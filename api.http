@@ -3,15 +3,16 @@
 @prefix = api
 @host = http://{{hostname}}:{{port}}/{{prefix}}
 @contentType = application/json
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJ0ZXMydEB0ZXN0LmNvbSIsInVzZXJuYW1lIjoidGVzdDIiLCJyb2xlcyI6WyJHRU5FUkFMIl0sImlhdCI6MTYxMzAwNzk3OCwiZXhwIjoxNjEzMDExNTc4fQ.kZCUilQczEChBEOHU9byX8e_7lq_AHDGoerJ_CB5s30
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJ0ZXN0MUB0ZXN0LmNvbSIsInVzZXJuYW1lIjoidGVzdDEiLCJyb2xlcyI6WyJHRU5FUkFMIiwiQURNSU4iLCJBVVRIT1IiXSwiaWF0IjoxNjEzMDIyOTA2LCJleHAiOjE2MTMwMjY1MDZ9.iC70MbkMhEPyG46jh3Js_hRxuF3OJ3yfVoCI3JzhjqY
+
 
 ### Create Role
 POST {{host}}/roles HTTP/1.1
 content-type: {{contentType}}
 
 {
-    "name": "ADMIN",
-    "description": "admin role"
+    "name": "AUTHOR",
+    "description": "author role"
 }
 
 
@@ -25,18 +26,18 @@ POST {{host}}/auth/signup HTTP/1.1
 content-type: {{contentType}}
 
 {
-    "username": "test2",
-    "email": "tes2t@test.com",
+    "username": "test1",
+    "email": "test1@test.com",
     "password": "123"
 }
 
 
-### signip
+### signin
 POST {{host}}/auth/signin HTTP/1.1
 content-type: {{contentType}}
 
 {
-    "username": "test2",
+    "username": "test1",
     "password": "123"
 }
 
@@ -74,3 +75,33 @@ content-type: {{contentType}}
 ### Delete Mensaje
 DELETE {{host}}/roles/1 HTTP/1.1
 content-type: {{contentType}}
+
+
+### Create Book
+POST {{host}}/books HTTP/1.1
+content-type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+    "name": "Clean Code",
+    "description": "Clean Code Book",
+    "authors": [1]
+}
+
+
+### Get books
+GET {{host}}/books HTTP/1.1
+content-type: {{contentType}}
+Authorization: Bearer {{token}}
+
+
+### Get a book
+GET {{host}}/books/1 HTTP/1.1
+content-type: {{contentType}}
+Authorization: Bearer {{token}}
+
+
+### Get book by Author
+GET {{host}}/books/author/1 HTTP/1.1
+content-type: {{contentType}}
+Authorization: Bearer {{token}}

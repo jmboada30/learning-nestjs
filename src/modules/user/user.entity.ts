@@ -10,6 +10,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Book } from '../book/book.entity';
 import { Role } from '../role/role.entity';
 
 import { UserDetails } from './user.details.entity';
@@ -49,4 +50,7 @@ export class User extends BaseEntity {
   })
   @JoinTable({ name: 'users_roles' })
   roles: Role[];
+
+  @ManyToMany(() => Book, (book) => book.authors)
+  books: Book[];
 }
