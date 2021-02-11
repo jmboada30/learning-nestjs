@@ -36,7 +36,7 @@ export class User extends BaseEntity {
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @OneToOne((type) => UserDetails, {
+  @OneToOne(() => UserDetails, {
     cascade: true,
     nullable: false,
     eager: true,
@@ -44,7 +44,9 @@ export class User extends BaseEntity {
   @JoinColumn()
   details: UserDetails;
 
-  @ManyToMany((type) => Role, (role) => role.users)
+  @ManyToMany(() => Role, (role) => role.users, {
+    eager: true,
+  })
   @JoinTable({ name: 'users_roles' })
   roles: Role[];
 }

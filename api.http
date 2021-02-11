@@ -1,0 +1,59 @@
+@hostname = localhost
+@port = 3000
+@prefix = api
+@host = http://{{hostname}}:{{port}}/{{prefix}}
+@contentType = application/json
+
+### Create Role
+POST {{host}}/roles HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "name": "AUTHOR",
+    "description": "author role"
+}
+
+
+### signup
+POST {{host}}/auth/signup HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "username": "test2",
+    "email": "tes2t@test.com",
+    "password": "123"
+}
+
+
+### signip
+POST {{host}}/auth/signin HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "username": "test2",
+    "password": "123"
+}
+
+
+### getUsers
+GET {{host}}/users HTTP/1.1
+
+
+### getUserById
+GET {{host}}/users/4 HTTP/1.1
+
+
+
+### Update User
+PUT {{host}}/users/1 HTTP/1.1
+content-type: {{contentType}}
+
+{
+    "username": "test",
+    "email": "test@test.com"
+}
+
+
+### Delete Mensaje
+DELETE {{host}}/roles/1 HTTP/1.1
+content-type: {{contentType}}

@@ -21,7 +21,7 @@ export class UserService {
 
   async get(userId: number): Promise<ReadUserDto> {
     const user: User = await this.userRepository.findOne(userId, {
-      where: { status: 'ACTIVE' },
+      where: { status: 1 },
     });
 
     if (!user) {
@@ -46,6 +46,7 @@ export class UserService {
       throw new NotFoundException('User does not exists');
     }
 
+    fountUser.email = user.email;
     fountUser.username = user.username;
     const updatedUser = await this.userRepository.save(fountUser);
     return plainToClass(ReadUserDto, updatedUser);
