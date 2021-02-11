@@ -10,6 +10,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { Roles } from '../role/decorators/role.decorator';
+import { RoleGuard } from '../role/guards/role.guard';
 import { ReadUserDto, UpdateUserDto } from './dtos';
 import { UserService } from './user.service';
 
@@ -18,12 +20,14 @@ export class UserController {
   constructor(private userService: UserService) {}
 
   @Get(':userId')
+  @Roles('ADMIN', 'AUTHOR')
+  @UseGuards(AuthGuard(), RoleGuard)
   getUser(@Param('userId', ParseIntPipe) userId: number): Promise<ReadUserDto> {
     return this.userService.get(userId);
   }
 
-  @UseGuards(AuthGuard())
   @Get()
+  @UseGuards(AuthGuard())
   getUsers(): Promise<ReadUserDto[]> {
     return this.userService.getAll();
   }
